@@ -3,6 +3,9 @@ from datetime import datetime, timezone
 from typing import List, Optional
 import uuid
 
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
 from fastapi import APIRouter, Form, HTTPException, UploadFile, File
 from fastapi.responses import JSONResponse
 
@@ -175,3 +178,14 @@ def download_card(card_id: str):
 
     url = store.signed_url(row["file_path"], expires=120)
     return {"url": url}
+
+app = FastAPI(title="Pinboard")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+app.include_router(router)
