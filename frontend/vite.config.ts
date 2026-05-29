@@ -6,7 +6,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://pinboard-xmr7.vercel.app/:8000',
+        target: 'https://pinboard-xmr7.vercel.app/',
         changeOrigin: true,
       },
     },

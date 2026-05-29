@@ -24,21 +24,21 @@ async function req<T>(url: string, options?: RequestInit): Promise<T> {
 
 export const api = {
   getCards: (status: 'todo' | 'done') =>
-    req<Card[]>(`/api/cards?status=${status}`),
+    req<Card[]>(`https://pinboard-xmr7.vercel.app/api/cards?status=${status}`),
 
   createCards: (form: FormData) =>
-    req<Card[]>('/api/cards', { method: 'POST', body: form }),
+    req<Card[]>('https://pinboard-xmr7.vercel.app/api/cards', { method: 'POST', body: form }),
 
   updateCard: (id: string, body: Partial<{ content: string; priority: string; status: 'todo' | 'done' }>) =>
-    req<Card>(`/api/cards/${id}`, {
+    req<Card>(`https://pinboard-xmr7.vercel.app/api/cards/${id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
     }),
 
   deleteCard: (id: string) =>
-    req<{ ok: boolean }>(`/api/cards/${id}`, { method: 'DELETE' }),
+    req<{ ok: boolean }>(`https://pinboard-xmr7.vercel.app/api/cards/${id}`, { method: 'DELETE' }),
 
   getDownloadUrl: (id: string) =>
-    req<{ url: string }>(`/api/cards/${id}/download`),
+    req<{ url: string }>(`https://pinboard-xmr7.vercel.app/api/cards/${id}/download`),
 }
